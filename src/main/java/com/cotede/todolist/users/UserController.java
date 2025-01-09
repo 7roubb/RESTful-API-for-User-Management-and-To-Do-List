@@ -39,8 +39,8 @@ public class UserController {
 
     @DeleteMapping
     public ApiResponse<Boolean> deleteUser(@RequestParam String username) {
-        userService.deleteUser(username);
-        return ApiResponse.success(true, HttpStatus.OK, getMessage("user.delete.success", username));
+        Boolean flag = userService.deleteUser(username);
+        return ApiResponse.success(flag, HttpStatus.OK, getMessage("user.delete.success", username));
     }
 
     public String getMessage(String code , String message) {

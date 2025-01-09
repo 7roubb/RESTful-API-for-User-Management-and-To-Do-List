@@ -1,4 +1,4 @@
-package com.cotede.todolist.toDos;
+package com.cotede.todolist.tasks;
 
 import com.cotede.todolist.common.BaseEntity;
 import com.cotede.todolist.users.User;
@@ -11,13 +11,13 @@ import lombok.*;
 @NoArgsConstructor
 @Entity
 @Table(
-        name = "\"toDo\"",
+        name = "\"tasks\"",
         indexes = {
-                @Index(name = "idx_toDo_title", columnList = "title"),
-                @Index(name = "idx_toDo_user", columnList = "user_username")
+                @Index(name = "idx_task_title", columnList = "title"),
+                @Index(name = "idx_task_user", columnList = "user_username")
         }
 )
-public class ToDo extends BaseEntity {
+public class Task extends BaseEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

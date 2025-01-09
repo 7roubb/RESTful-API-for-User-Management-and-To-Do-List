@@ -1,16 +1,17 @@
-package com.cotede.todolist.toDos;
+package com.cotede.todolist.tasks;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+
 @Getter
 @Setter
-@AllArgsConstructor
 @NoArgsConstructor
-public class ToDoResponseDTO {
-    private Long id;
+@AllArgsConstructor
+public class TaskRequestDTO {
     private String title;
     private String description;
+    private String username;
 }

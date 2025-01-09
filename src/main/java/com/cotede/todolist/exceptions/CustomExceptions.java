@@ -22,8 +22,8 @@ public class CustomExceptions {
 
     }
 
-    public static class ToDoNotFound extends RuntimeException {
-        public ToDoNotFound(String Title) {
+    public static class TaskNotFound extends RuntimeException {
+        public TaskNotFound(String Title) {
             super(Title);
         }
     }

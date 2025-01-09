@@ -53,4 +53,11 @@ public class GlobalExceptionHandler {
         return ResponseEntity.status(HttpStatus.CONFLICT)
                 .body(ApiResponse.error(message, HttpStatus.CONFLICT));
     }
+
+    @ExceptionHandler(CustomExceptions.TaskNotFound.class)
+    public ResponseEntity<ApiResponse<Void>> handleTaskNotFound(CustomExceptions.TaskNotFound ex) {
+        String message = messageSource.getMessage("task.not.found", new Object[]{ex.getMessage()}, LocaleContextHolder.getLocale());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                .body(ApiResponse.error(message, HttpStatus.NOT_FOUND));
+    }
 }
