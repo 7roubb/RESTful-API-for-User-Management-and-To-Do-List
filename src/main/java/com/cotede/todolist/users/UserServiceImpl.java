@@ -2,6 +2,7 @@ package com.cotede.todolist.users;
 
 import com.cotede.todolist.exceptions.CustomExceptions;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
@@ -12,6 +13,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     @Transactional
@@ -35,7 +37,8 @@ public class UserServiceImpl implements UserService {
                 });
 
         User user = UserMapper.toUser(userRequestDTO);
-        user.setPassword(user.getPassword());
+        String encodedPassword = passwordEncoder.encode(user.getPassword());
+        user.setPassword(encodedPassword);
         User savedUser = userRepository.save(user);
         return UserMapper.toUserResponse(savedUser);
     }

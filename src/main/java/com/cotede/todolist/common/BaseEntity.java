@@ -5,8 +5,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.SuperBuilder;
-import lombok.extern.slf4j.Slf4j;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import java.time.LocalDateTime;
 
 @MappedSuperclass
@@ -23,7 +24,8 @@ public class BaseEntity {
     @Column(name = "created_by", updatable = false)
     private String createdBy;
 
-    @Column(name = "updated_at")
+    @LastModifiedDate
+    @Column(name = "updated_at",insertable = false)
     private LocalDateTime updatedAt;
 
     @Column(name = "updated_by")
@@ -31,14 +33,12 @@ public class BaseEntity {
 
     @PrePersist
     public void prePersist() {
-        this.updatedAt = null;
         this.createdBy = getUserName();
     }
 
     @PreUpdate
     public void preUpdate() {
         this.updatedBy = getUserName();
-        this.updatedAt = LocalDateTime.now();
     }
 
     private String getUserName() {
