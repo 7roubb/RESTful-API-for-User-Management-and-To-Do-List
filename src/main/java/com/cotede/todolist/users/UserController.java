@@ -18,11 +18,6 @@ public class UserController {
 
     private final UserService userService;
     private final MessageSource messageSource;
-    @PostMapping
-    public ApiResponse<UserResponseDTO> createUser(@Validated(OnCreate.class) @RequestBody UserRequestDTO user) {
-        UserResponseDTO userResponse = userService.createUser(user);
-        return ApiResponse.success(userResponse, HttpStatus.OK, getMessage("user.create.success", user.getUsername()));
-    }
 
     @GetMapping
     public ApiResponse<UserResponseDTO> getUserByUserName(@RequestParam String username) {
