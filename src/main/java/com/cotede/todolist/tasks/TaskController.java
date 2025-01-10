@@ -7,6 +7,8 @@ import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
@@ -23,10 +25,11 @@ public class TaskController {
     @GetMapping
     public ApiResponse<Map<String, Object>> getTasks(
             @RequestParam(defaultValue = "1") int page,
-            @RequestParam(defaultValue = "10") int limit,
-            @RequestHeader String username
+            @RequestParam(defaultValue = "10") int limit
     ) {
-        Map<String, Object> response = taskService.getTasks(page, limit, username);
+        Map<String, Object> response = taskService.getTasks(page, limit);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
         return ApiResponse.success(response,HttpStatus.OK,getMessage("user.get.tasks.success",username));
     }
 

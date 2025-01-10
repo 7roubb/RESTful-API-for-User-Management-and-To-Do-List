@@ -3,7 +3,7 @@ package com.cotede.todolist.tasks;
 import java.util.Map;
 
 public interface TaskService {
-    Map<String, Object> getTasks(int page, int limit, String username);
+    Map<String, Object> getTasks(int page, int limit);
 
     Task createTask(TaskRequestDTO taskRequestDTO);
 

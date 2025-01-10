@@ -7,6 +7,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -21,7 +23,10 @@ public class TaskServiceImpl implements TaskService {
     private final UserRepository userRepository;
 
     @Override
-    public Map<String, Object> getTasks(int page, int limit, String username) {
+    public Map<String, Object> getTasks(int page, int limit) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
+
         Pageable pageable = PageRequest.of(page - 1 , limit);
         Page<Task> tasks = taskRepository.findAllByUser_Username(username, pageable);
 
@@ -42,10 +47,12 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public Task createTask(TaskRequestDTO taskRequestDTO) {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName();
         Task task = TaskMapper.toEntityTask(taskRequestDTO);
         task.setCreatedAt(LocalDateTime.now());
-        User user = userRepository.findByUsername(taskRequestDTO.getUsername()).orElseThrow(
-                ()-> new CustomExceptions.UserNotFound(taskRequestDTO.getUsername())
+        User user = userRepository.findByUsername(username).orElseThrow(
+                ()-> new CustomExceptions.UserNotFound(username)
         );
         task.setUser(user);
         task = taskRepository.save(task);

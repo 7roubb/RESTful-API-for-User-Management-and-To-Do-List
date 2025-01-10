@@ -13,5 +13,4 @@ import lombok.Setter;
 public class TaskRequestDTO {
     private String title;
     private String description;
-    private String username;
 }
