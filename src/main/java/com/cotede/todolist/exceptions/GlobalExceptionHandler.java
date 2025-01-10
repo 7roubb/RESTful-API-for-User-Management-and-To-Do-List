@@ -77,4 +77,10 @@ public class GlobalExceptionHandler {
                 .body(ApiResponse.error(message, HttpStatus.UNAUTHORIZED));
 
     }
+    @ExceptionHandler(CustomExceptions.RateLimitExceededException.class)
+    public ResponseEntity<ApiResponse<Void>> handleRateLimitExceeded(CustomExceptions.RateLimitExceededException ex) {
+        String message = messageSource.getMessage("rate.limit.exceeded", new Object[]{ex.getMessage()}, LocaleContextHolder.getLocale());
+        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS)
+                .body(ApiResponse.error(message, HttpStatus.TOO_MANY_REQUESTS));
+    }
 }

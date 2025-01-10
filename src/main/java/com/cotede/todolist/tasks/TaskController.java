@@ -2,6 +2,7 @@ package com.cotede.todolist.tasks;
 
 
 import com.cotede.todolist.common.ApiResponse;
+import com.cotede.todolist.config.RateLimitingService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.i18n.LocaleContextHolder;
@@ -21,12 +22,15 @@ import java.util.Map;
 public class TaskController {
     private final TaskService taskService;
     private final MessageSource messageSource;
+    private final RateLimitingService rateLimitingService;
+
 
     @GetMapping
     public ApiResponse<Map<String, Object>> getTasks(
             @RequestParam(defaultValue = "1") int page,
             @RequestParam(defaultValue = "10") int limit
     ) {
+        rateLimitingService.checkRequestLimit();
         Map<String, Object> response = taskService.getTasks(page, limit);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();

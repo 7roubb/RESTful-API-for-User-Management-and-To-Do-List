@@ -34,4 +34,9 @@ public class CustomExceptions {
         }
     }
 
+    public static class RateLimitExceededException extends RuntimeException {
+        public RateLimitExceededException(String message) {
+            super(message);
+        }
+    }
 }
