@@ -50,6 +50,8 @@ This is a To-Do list application built with Spring Boot 6, which integrates Redi
 - **Redis**: Used for rate limiting the `POST /api/tasks` requests to prevent spamming the task creation endpoint.
 - **PostgreSQL**: Used for persistent data storage of tasks and users.
 
+## How to run:
+
 ## Step 1: Clone the Repository
 
 ```bash
@@ -62,7 +64,7 @@ Make sure Docker is running, then execute:
 ```bash
 docker-compose up
 ```
-## Step 4: Build the Spring Boot Application
+## Step 3: Build the Spring Boot Application
 You can build the project using Maven or Gradle, depending on your preference.
 
 Using Maven:
@@ -70,7 +72,7 @@ Using Maven:
 ```bash
 mvn clean install
 ```
-## Step 5: Run the Application
+## Step 4: Run the Application
 Run the Spring Boot application using the command:
 
 Using Maven:
@@ -78,3 +80,9 @@ Using Maven:
 ```bash
 mvn spring-boot:run
 ```
+## Step 5: Use Postman for the Endpoints
+The token is generated upon login. It is a Bearer token, which should be included in the request header as `Authorization: Bearer <token>`.
+
+## Contributors
+[Osama Alhroub](https://github.com/7roubb)
+
