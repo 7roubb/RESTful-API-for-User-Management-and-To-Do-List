@@ -50,3 +50,31 @@ This is a To-Do list application built with Spring Boot 6, which integrates Redi
 - **Redis**: Used for rate limiting the `POST /api/tasks` requests to prevent spamming the task creation endpoint.
 - **PostgreSQL**: Used for persistent data storage of tasks and users.
 
+## Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/7roubb/RESTful-API-for-User-Management-and-To-Do-List
+cd RESTful-API-for-User-Management-and-To-Do-List
+```
+## Step 2: Run Docker Compose
+Make sure Docker is running, then execute:
+
+```bash
+docker-compose up
+```
+## Step 4: Build the Spring Boot Application
+You can build the project using Maven or Gradle, depending on your preference.
+
+Using Maven:
+
+```bash
+mvn clean install
+```
+## Step 5: Run the Application
+Run the Spring Boot application using the command:
+
+Using Maven:
+
+```bash
+mvn spring-boot:run
+```
